@@ -97,6 +97,12 @@
                 var title = vars.currentImage.attr('title');
                 if(title.substr(0,1) == '#') title = $(title).html();   
 
+		if(typeof settings.caption === 'function') {
+		    try {
+		        title = settings.caption(vars.currentImage);
+		    } catch (e) { }
+		}
+
                 if(nivoCaption.css('display') == 'block'){
                     setTimeout(function(){
                         nivoCaption.html(title);
