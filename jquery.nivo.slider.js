@@ -134,14 +134,14 @@
                 clearInterval(timer);
                 timer = '';
                 vars.currentSlide -= 2;
-                nivoRun(slider, kids, settings, 'prev');
+                nivoRun(slider, kids, settings, 'prev', true);
             });
             
             $(slider).on('click', 'a.nivo-nextNav', function(){
                 if(vars.running) { return false; }
                 clearInterval(timer);
                 timer = '';
-                nivoRun(slider, kids, settings, 'next');
+                nivoRun(slider, kids, settings, 'next', true);
             });
         }
         
@@ -292,7 +292,7 @@
         };
 
         // Private run method
-        var nivoRun = function(slider, kids, settings, nudge){          
+        var nivoRun = function(slider, kids, settings, nudge, click){
             // Get our vars
             var vars = slider.data('nivo:vars');
             
@@ -305,7 +305,7 @@
             if((!vars || vars.stop) && !nudge) { return false; }
             
             // Trigger the beforeChange callback
-            settings.beforeChange.call(this);
+            settings.beforeChange.call(this, click);
 
             // Set current background before change
             if(!nudge){
